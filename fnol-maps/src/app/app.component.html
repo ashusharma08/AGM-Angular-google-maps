@@ -1,0 +1,57 @@
+<div class = "main">
+<agm-map 
+[latitude]="lat" 
+[longitude]="lng"
+[zoom] = "zoom"
+[zoomControl] = "true"
+[map-type] = "SATELLITE"
+(mapClick)= "mapClicked($event)"
+>
+    <agm-marker
+        *ngFor = "let m of markers; let i = index"
+        (markerClick) = "clickedMarker(m,i)"
+        [latitude] = "m.lat"
+        [longitude] = "m.lng">
+        <agm-info-window>
+            <strong>{{m.name}}</strong><br/>
+            <a class = "removeMarker" (click)="removeMarker(m)">Remove Marker</a>
+        </agm-info-window>
+    </agm-marker>
+    <agm-kml-layer data-ng-style=""></agm-kml-layer>
+</agm-map>
+<div class ="row">
+    <div class="panel">
+        <div class= "panelHeading">
+            <h3 class= "title">Add new Marker</h3>
+        </div>
+        <div class = "panelContent">
+            <form (submit)="addMarker()">
+                <label>Location Name</label>
+                <input type="text" [(ngModel)]="markerLocationName" name="markerLocationName"/> 
+                <label>Latitude</label>
+                <input type="text" [(ngModel)]="markerLatitude" name="markerLatitude"/> 
+                <label>Longitude</label>
+                <input type="text" [(ngModel)]="markerLongitude" name="markerLongitude"/> 
+                <label>ZipCode</label>
+                <input type="text" [(ngModel)]="markerZipcode" name="markerZipcode"/> 
+                <label>Intensity</label>
+                <select [(ngModel)]="markerIntensity" name="markerIntensity">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10">10</option>                    
+                </select>
+                <input type="submit" value="Add new location"/>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</div>
